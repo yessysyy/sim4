@@ -1,0 +1,7 @@
+{
+  "name": "SIM1",
+  "description": "Sistem pengelolaan database dan presensi kegiatan Muda-Mudi dengan integrasi Google Sheets untuk rekapitulasi data yang akurat.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
