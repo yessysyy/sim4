@@ -1,0 +1,8 @@
+{
+  "name": "Video",
+  "description": "A professional video competition assessment platform featuring judging forms, scoring dashboards, and AI-powered feedback analysis.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
