@@ -86,18 +86,43 @@ export const storageService = {
     return data ? JSON.parse(data) : [];
   },
 
-  saveAttendance: (records: Omit<AttendanceRecord, 'id' | 'timestamp'>[]): void => {
-    const existing = storageService.getAttendance();
-    const newRecords = records.map(r => ({
-      ...r,
-      id: Math.random().toString(36).substr(2, 9),
+ saveAttendance: (records: Omit<AttendanceRecord, 'id' | 'timestamp'>[]): void => {
+  const existing = storageService.getAttendance();
+
+  records.forEach(record => {
+
+    const index = existing.findIndex(
+      r =>
+        r.memberName === record.memberName &&
+        r.date === record.date &&
+        r.kegiatan === record.kegiatan
+    );
+
+    const newRecord = {
+      ...record,
+      id:
+        index >= 0
+          ? existing[index].id
+          : Math.random().toString(36).substr(2, 9),
       timestamp: new Date().toISOString(),
-    }));
-    
-    const allRecords = [...existing, ...newRecords];
-    localStorage.setItem(STORAGE_KEYS.ATTENDANCE, JSON.stringify(allRecords));
-    syncToGoogleSheet('ATTENDANCE', newRecords);
-  },
+    };
+
+    if (index >= 0) {
+      // update data lama
+      existing[index] = newRecord;
+    } else {
+      // tambah data baru
+      existing.push(newRecord);
+    }
+  });
+
+  localStorage.setItem(
+    STORAGE_KEYS.ATTENDANCE,
+    JSON.stringify(existing)
+  );
+
+  syncToGoogleSheet('ATTENDANCE', records);
+},
 
   updateAttendanceRecord: (record: AttendanceRecord): void => {
     const attendance = storageService.getAttendance();
