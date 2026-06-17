@@ -48,7 +48,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, onBack }) => {
           
           <div className="relative z-10 space-y-4">
             <div className="text-sm font-black text-yellow-400 uppercase tracking-[0.4em] mb-2">Secure Access</div>
-            <h2 className="text-4xl font-black tracking-tight">Akun <br />Pengurus</h2>
+            <h2 className="text-4xl font-black tracking-tight">Akun Khusus <br />Pengurus</h2>
             <div className="h-1 w-12 bg-white/30 mx-auto rounded-full mt-4"></div>
           </div>
         </div>
